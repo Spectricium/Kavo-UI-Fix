@@ -21,6 +21,7 @@ function gethui()
 		end
 	end
 end
+local guiPath = gethui()
 local tween = game:GetService("TweenService")
 local tweeninfo = TweenInfo.new
 local input = game:GetService("UserInputService")
@@ -161,15 +162,15 @@ end)
 local LibName = "Kavo"
 
 function Kavo:ToggleUI()
-    if game.CoreGui[LibName].Enabled then
-        game.CoreGui[LibName].Enabled = false
+    if guiPath[LibName].Enabled then
+        guiPath[LibName].Enabled = false
     else
-        game.CoreGui[LibName].Enabled = true
+        guiPath[LibName].Enabled = true
     end
 end
 
 function Kavo.CreateLib(kavName, themeList)
-    if gethui():FindFirstChild(LibName) ~= nil then gethui():FindFirstChild(LibName):Destroy() end
+    if guiPath:FindFirstChild(LibName) ~= nil then guiPath:FindFirstChild(LibName):Destroy() end
     if not themeList then
         themeList = themes
     end
@@ -244,7 +245,7 @@ function Kavo.CreateLib(kavName, themeList)
     blurFrame.Size = UDim2.new(0, 376, 0, 289)
     blurFrame.ZIndex = 999
 
-    ScreenGui.Parent = gethui()
+    ScreenGui.Parent = guiPath
     ScreenGui.Name = LibName
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ScreenGui.ResetOnSpawn = false
