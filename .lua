@@ -1,5 +1,27 @@
 local Kavo = {}
-
+local protectedPath = {
+	game:GetService("CoreGui").RobloxGui,
+	game:GetService("CoreGui").RobloxPromptGui,
+	game:GetService("CoreGui").RobloxNetworkPauseNotification,
+	game:GetService("CoreGui").ThemeProvider,
+	game:GetService("CoreGui").TeleportGui,
+	game:GetService("CoreGui").TeleportEffectGui,
+	game:GetService("CoreGui").PurchasePrompt,
+	game:GetService("CoreGui").PublishAssetPrompt,
+	game:GetService("CoreGui").PlayerList,
+	game:GetService("CoreGui").InGameFullscreenTitleBarScreen,
+	game:GetService("CoreGui").HeadsetDisconnectedDialog,
+	game:GetService("CoreGui").ExplorerSelections,
+	game:GetService("CoreGui").DevConsoleMaster,
+	game:GetService("CoreGui")
+}
+function gethui()
+	for i,v in pairs(protectedPath) do
+		if pcall(function() Instance.new("Folder",v):Destroy() end) then
+			return v
+		end
+	end
+end
 local tween = game:GetService("TweenService")
 local tweeninfo = TweenInfo.new
 local input = game:GetService("UserInputService")
@@ -148,6 +170,7 @@ function Kavo:ToggleUI()
 end
 
 function Kavo.CreateLib(kavName, themeList)
+    if gethui():FindFirstChild(LibName) ~= nil then gethui():FindFirstChild(LibName):Destroy() end
     if not themeList then
         themeList = themes
     end
@@ -222,7 +245,7 @@ function Kavo.CreateLib(kavName, themeList)
     blurFrame.Size = UDim2.new(0, 376, 0, 289)
     blurFrame.ZIndex = 999
 
-    ScreenGui.Parent = game.CoreGui
+    ScreenGui.Parent = gethui()
     ScreenGui.Name = LibName
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ScreenGui.ResetOnSpawn = false
