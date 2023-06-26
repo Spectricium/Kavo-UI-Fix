@@ -11,7 +11,6 @@ local protectedPath = {
 	game:GetService("CoreGui").PlayerList,
 	game:GetService("CoreGui").InGameFullscreenTitleBarScreen,
 	game:GetService("CoreGui").HeadsetDisconnectedDialog,
-	game:GetService("CoreGui").ExplorerSelections,
 	game:GetService("CoreGui").DevConsoleMaster,
 	game:GetService("CoreGui")
 }
